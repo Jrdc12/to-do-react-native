@@ -4,13 +4,14 @@ import { useState } from 'react'
 export default function GoalInput(props) {
 	const [enteredGoal, setEnteredGoal] = useState('')
 
-	function goalInputHandler(enteredText) {
+	// THIS IS THE NEW STANDARD
+	const goalInputHandler = (enteredText) => {
 		setEnteredGoal(enteredText)
 	}
 
-	function addGoalHandler() {
+	const addGoalHandler = () => {
 		props.onAddGoal(enteredGoal)
-        setEnteredGoal('')
+		setEnteredGoal('')
 	}
 
 	return (
@@ -19,7 +20,7 @@ export default function GoalInput(props) {
 				style={styles.textInput}
 				placeholder='Your goals'
 				onChangeText={goalInputHandler}
-                value={enteredGoal}
+				value={enteredGoal}
 			/>
 			<Button title='ADD GOAL' onPress={addGoalHandler} />
 		</View>

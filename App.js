@@ -7,11 +7,17 @@ import GoalInput from './components/GoalInput'
 export default function App() {
 	const [goals, setGoals] = useState([])
 
-	function addGoalHandler(enteredGoal) {
+	const addGoalHandler = (enteredGoal) => {
 		setGoals((currentGoals) => [
 			...currentGoals,
-			{ text: enteredGoal, key: Math.random().toString() },
+			{ text: enteredGoal, id: Math.random().toString() },
 		])
+	}
+
+	const deleteGoalHandler = (id) => {
+		setGoals((currentGoals) => {
+			return currentGoals.filter((goal) => goal.id !== id)
+		})
 	}
 
 	return (
@@ -21,7 +27,13 @@ export default function App() {
 				<FlatList
 					data={goals}
 					renderItem={(itemData) => {
-						return <GoalItem text={itemData.item.text} />
+						return (
+							<GoalItem
+								text={itemData.item.text}
+								id={itemData.item.id}
+								onDeleteItem={deleteGoalHandler}
+							/>
+						)
 					}}
 					alwaysBounceHorizontal={false}
 				/>
